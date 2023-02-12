@@ -11,6 +11,9 @@ export const TrendingMovies = () => {
 
   useEffect(() => {
     const fetchMovies = async () => {
+      if (movies.length !== 0) {
+        return;
+      }
       try {
         setLoading(true);
         const results = await getAllMovies();
@@ -23,7 +26,7 @@ export const TrendingMovies = () => {
       }
     };
     fetchMovies();
-  }, []);
+  }, [movies]);
 
   return (
     <div>
