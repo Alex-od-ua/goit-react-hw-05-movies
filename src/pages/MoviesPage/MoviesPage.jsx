@@ -1,3 +1,9 @@
+import { MovieSearch } from 'components/MovieSearch/MovieSearch';
+
 export const MoviesPage = () => {
-  return <h1>Movies Page</h1>;
+  return (
+    <>
+      <MovieSearch />
+    </>
+  );
 };

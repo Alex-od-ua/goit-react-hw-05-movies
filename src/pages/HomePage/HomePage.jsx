@@ -1,4 +1,4 @@
-import { TrendingMovies } from 'components/Movies/Movies';
+import { TrendingMovies } from 'components/TrendingMovies/TrendingMovies';
 
 export const HomePage = () => {
   return (

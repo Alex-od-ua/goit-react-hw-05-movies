@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { MovieItem } from 'components/MovieItem/MovieItem';
+import { TrendingMoviesList } from 'components/TrendingMovies/TrendingMoviesList/TrendingMoviesList';
 import { getAllMovies } from 'components/services/api';
 import { Loader } from 'components/Loader/Loader';
 
@@ -18,7 +18,7 @@ export const TrendingMovies = () => {
         setLoading(true);
         const results = await getAllMovies();
         setMovies(results);
-        console.log(movies);
+        // console.log(movies);
       } catch (error) {
         setError(error.mesage);
       } finally {
@@ -32,7 +32,7 @@ export const TrendingMovies = () => {
     <div>
       {error && <p className="">{error}</p>}
       {loading && <Loader />}
-      <MovieItem movies={movies} />
+      <TrendingMoviesList movies={movies} />
     </div>
   );
 };

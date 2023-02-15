@@ -8,6 +8,16 @@ const instance = axios.create({
   },
 });
 
+export const searchMovies = async query => {
+  const { data } = await instance.get('/search/movie?', {
+    params: {
+      query,
+    },
+  });
+
+  return data.results;
+};
+
 export const getAllMovies = async (page = 1) => {
   const { data } = await instance.get('/trending/all/day?', {
     params: {
@@ -17,18 +27,20 @@ export const getAllMovies = async (page = 1) => {
   return data.results;
 };
 
-export const getMovieDetals = async movie_id => {
-  const { data } = await instance.get(`/movie/${movie_id}?`);
+export const getMovieById = async movieId => {
+  const { data } = await instance.get(`/movie/${movieId}?`);
 
   return data;
 };
 
-export const searchMovies = async search => {
-  const { data } = await instance.get(
-    `/{search}/movie?&language=en-US&page=1&include_adult=false`
-  );
+export const getCasts = async movieId => {
+  const { data } = await instance.get(`/movie/${movieId}/credits?`);
+  return data.cast;
+};
 
-  return data;
+export const getReviews = async movieId => {
+  const { data } = await instance.get(`/movie/${movieId}//reviews?`);
+  return data.results;
 };
 
 // api key: 5bbf892bcd99762773ec3ce2eced7cd4
