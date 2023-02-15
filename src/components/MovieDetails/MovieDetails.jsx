@@ -1,80 +1,47 @@
-import {
-  Link,
-  // useParams,
-  Outlet,
-  useNavigate,
-  useLocation,
-} from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
-import { useCallback } from 'react';
-// import { Loader } from 'components/Loader/Loader';
+import { getMovieById } from 'components/services/api';
+import { MovieDetailsList } from './MovieDetailsList/MovieDetailsList';
+import { Loader } from 'components/Loader/Loader';
 
-export const MovieDetails = ({ details, genres }) => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from;
-  console.log(from);
+export const MovieDetails = () => {
+  const [movie, setMovie] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [genres, setGenres] = useState([]);
 
-  const { poster_path, original_title, vote_average, overview, release_date } =
-    details;
+  const { movieId } = useParams();
 
-  // const onGoBackButtonClick = () => navigate(from);
+  useEffect(() => {
+    const fetchMovie = async () => {
+      if (movie.length !== 0) {
+        return;
+      }
+      try {
+        setLoading(true);
+        const result = await getMovieById(movieId);
+        setMovie(result);
+        setGenres(result.genres);
+        console.log(movie);
+      } catch (error) {
+        setError(error.mesage);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchMovie();
+  }, [movieId, movie]);
 
-  const onGoBackButtonClick = useCallback(() => {
-    navigate(from);
-  }, []);
-
-  const elements = genres.map(({ name, id }) => <li key={id}>{name}</li>);
-
-  let year = new Date(release_date).getFullYear();
+  // console.log(movie);
+  // console.log(useParams);
+  // console.log(movieId);
 
   return (
     <>
-      <div className="">
-        <div>
-          <button type="button" onClick={onGoBackButtonClick} className="">
-            Go back
-          </button>
-        </div>
-        <img
-          src={`https://image.tmdb.org/t/p/w300/${poster_path}`}
-          alt={original_title ? original_title : 'picture not found'}
-          loading="lazy"
-          className=""
-          width="300px"
-          height="450px"
-        />
-        <div className="">
-          <h2 className="">
-            {original_title ? original_title : 'Title not found'}
-            <span>({year ? year : '-'})</span>
-          </h2>
-          <p>
-            User score:{' '}
-            {vote_average ? ((vote_average / 10) * 100).toFixed(0) : 0}%
-          </p>
-          <h3 className="">Overview</h3>
-          <p>{overview}</p>
-          <h3 className="">Genres</h3>
-          <ul className="">{elements}</ul>
-        </div>
-      </div>
-      <div>
-        <h3>Additional information</h3>
-
-        <ul>
-          <li>
-            <Link to="cast">Cast</Link>
-          </li>
-
-          <li>
-            <Link to="reviews">Reviews</Link>
-          </li>
-        </ul>
-      </div>
-      <div>
-        <Outlet />
-      </div>
+      {error && <p className="">{error}</p>}
+      {loading && <Loader />}
+      {movie && <MovieDetailsList details={movie} genres={genres} />}
     </>
   );
 };
