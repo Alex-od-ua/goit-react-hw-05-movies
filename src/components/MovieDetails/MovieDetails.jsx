@@ -23,19 +23,14 @@ export const MovieDetails = () => {
         const result = await getMovieById(movieId);
         setMovie(result);
         setGenres(result.genres);
-        console.log(movie);
-      } catch (error) {
-        setError(error.mesage);
+      } catch ({ response }) {
+        setError(response.data.mesage);
       } finally {
         setLoading(false);
       }
     };
     fetchMovie();
   }, [movieId, movie]);
-
-  // console.log(movie);
-  // console.log(useParams);
-  // console.log(movieId);
 
   return (
     <>

@@ -16,5 +16,9 @@ export const NavBar = () => {
     </li>
   ));
 
-  return <ul className={css.menu}>{elements}</ul>;
+  return (
+    <div className={css.navbar}>
+      <ul className={css.menu}>{elements}</ul>
+    </div>
+  );
 };

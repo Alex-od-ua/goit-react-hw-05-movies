@@ -14,7 +14,6 @@ export const Reviews = () => {
   const [loading, setLoading] = useState(false);
 
   const { movieId } = useParams();
-  // console.log(movieId);
 
   useEffect(() => {
     const fetchMovie = async () => {
@@ -27,7 +26,7 @@ export const Reviews = () => {
         if (result.length === 0) {
           toast('Sorry, no reviews');
         }
-        console.log(result);
+        // console.log(result);
         setMovie(result);
       } catch ({ response }) {
         setError(response.data.message);

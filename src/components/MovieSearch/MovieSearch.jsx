@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-// import { ToastContainer, toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { searchMovies } from 'components/services/api';
 import { MovieSearchForm } from './MovieSearchForm/MovieSearchForm';
@@ -28,14 +28,16 @@ export const MovieSearch = () => {
         const results = await searchMovies(search);
         setMovies(results);
         console.log(movies);
-      } catch (error) {
-        setError(error.mesage);
-        // toast.error(error.mesage);
+      } catch ({ response }) {
+        setError(response.data.message);
+        console.log(response.data.message);
+        toast.error(`${response.data.message}`);
       } finally {
         setLoading(false);
       }
     };
     fetchMovies();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
   const onSearchMovies = search => {
@@ -44,10 +46,11 @@ export const MovieSearch = () => {
 
   return (
     <>
-      <MovieSearchForm onSubmit={onSearchMovies} />
       {loading && <Loader />}
       {error && <h1>error</h1>}
+      <MovieSearchForm onSubmit={onSearchMovies} />
       {movies && <MovieSearchList movies={movies} />}
+      <ToastContainer />
     </>
   );
 };

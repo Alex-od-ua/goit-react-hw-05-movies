@@ -1,17 +1,32 @@
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
+import { Link, useLocation } from 'react-router-dom';
+
+import css from '../TrendingMovies.module.css';
 
 export const TrendingMoviesList = ({ movies }) => {
-  const elements = movies.map(({ id, original_title, name }) => (
-    <Link key={id} className="" to={`/movies/${id}`}>
-      <li>{original_title ? original_title : name}</li>
-    </Link>
+  console.log(movies);
+  const location = useLocation();
 
-    // <li key={id}>
-    //   <Link className="" to={`/movies/${id}`}>
-    //     {original_title ? original_title : name}
-    //   </Link>
-    // </li>
+  const elements = movies.map(({ id, title, name }) => (
+    <Link
+      key={id}
+      className={css.link}
+      to={`/movies/${id}`}
+      state={{ from: location }}
+    >
+      <li className={css.item}>{title ? title : name}</li>
+    </Link>
   ));
 
-  return <ul className="">{elements}</ul>;
+  return <ul className={css.list}>{elements}</ul>;
+};
+
+TrendingMoviesList.propTypes = {
+  movies: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      original_title: PropTypes.string,
+    })
+  ),
 };
