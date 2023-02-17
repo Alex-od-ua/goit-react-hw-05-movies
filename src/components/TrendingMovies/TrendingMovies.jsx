@@ -3,11 +3,13 @@ import { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { TrendingMoviesList } from 'components/TrendingMovies/TrendingMoviesList/TrendingMoviesList';
+import TrendingMoviesList from './TrendingMoviesList/TrendingMoviesList';
 import { getAllMovies } from 'components/services/api';
-import { Loader } from 'components/Loader/Loader';
+import Loader from '../Loader/Loader';
 
-export const TrendingMovies = () => {
+import css from '../TrendingMovies/TrendingMovies.module.css';
+
+const TrendingMovies = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -21,7 +23,6 @@ export const TrendingMovies = () => {
         setLoading(true);
         const results = await getAllMovies();
         setMovies(results);
-        console.log(results);
       } catch ({ response }) {
         setError(response.data.mesage);
         toast(`${response.data.mesage}`);
@@ -34,6 +35,7 @@ export const TrendingMovies = () => {
 
   return (
     <div>
+      <h1 className={css.header}>Trending today</h1>
       {error && <p className="">{error}</p>}
       {loading && <Loader />}
       {movies && <TrendingMoviesList movies={movies} />}
@@ -41,3 +43,5 @@ export const TrendingMovies = () => {
     </div>
   );
 };
+
+export default TrendingMovies;

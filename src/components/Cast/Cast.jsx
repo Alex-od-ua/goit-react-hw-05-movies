@@ -5,10 +5,10 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { getCasts } from 'components/services/api';
-import { CastList } from './CastList/CastList';
-import { Loader } from 'components/Loader/Loader';
+import CastList from './CastList/CastList';
+import Loader from '../Loader/Loader';
 
-export const Cast = () => {
+const Cast = () => {
   const [movie, setMovie] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -24,7 +24,7 @@ export const Cast = () => {
         setLoading(true);
         const result = await getCasts(movieId);
         setMovie(result);
-        console.log(result);
+
         if (result.length === 0) {
           toast('Sorry, cast not found');
         }
@@ -49,3 +49,5 @@ export const Cast = () => {
     </>
   );
 };
+
+export default Cast;

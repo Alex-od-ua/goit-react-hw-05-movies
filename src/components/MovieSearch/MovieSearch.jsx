@@ -5,12 +5,12 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { searchMovies } from 'components/services/api';
-import { MovieSearchForm } from './MovieSearchForm/MovieSearchForm';
-import { MovieSearchList } from './MovieSearchList/MovieSearchList';
+import MovieSearchForm from './MovieSearchForm/MovieSearchForm';
+import MovieSearchList from './MovieSearchList/MovieSearchList';
 
-import { Loader } from 'components/Loader/Loader';
+import Loader from '../Loader/Loader';
 
-export const MovieSearch = () => {
+const MovieSearch = () => {
   const [movies, setMovies] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -27,7 +27,6 @@ export const MovieSearch = () => {
         setLoading(true);
         const results = await searchMovies(search);
         setMovies(results);
-        console.log(movies);
       } catch ({ response }) {
         setError(response.data.message);
         console.log(response.data.message);
@@ -54,3 +53,5 @@ export const MovieSearch = () => {
     </>
   );
 };
+
+export default MovieSearch;

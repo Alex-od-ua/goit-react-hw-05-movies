@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import css from './MovieSearchForm.module.css';
 
-export const MovieSearchForm = ({ onSubmit }) => {
+const MovieSearchForm = ({ onSubmit }) => {
   const [search, setSearch] = useState('');
 
   const handleChange = event => setSearch(event.target.value);
@@ -29,6 +29,8 @@ export const MovieSearchForm = ({ onSubmit }) => {
     </form>
   );
 };
+
+export default MovieSearchForm;
 
 MovieSearchForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,

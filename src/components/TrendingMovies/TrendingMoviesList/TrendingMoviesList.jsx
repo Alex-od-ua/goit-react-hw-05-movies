@@ -4,8 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 import css from '../TrendingMovies.module.css';
 
-export const TrendingMoviesList = ({ movies }) => {
-  console.log(movies);
+const TrendingMoviesList = ({ movies }) => {
   const location = useLocation();
 
   const elements = movies.map(({ id, title, name }) => (
@@ -30,3 +29,5 @@ TrendingMoviesList.propTypes = {
     })
   ),
 };
+
+export default TrendingMoviesList;

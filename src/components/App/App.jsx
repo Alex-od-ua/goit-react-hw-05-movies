@@ -1,29 +1,13 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
-import { NavBar } from 'components/NavBar/NavBar';
-import { HomePage } from 'pages/HomePage/HomePage';
-import { MoviesPage } from 'pages/MoviesPage/MoviesPage';
-import { MovieDetailsPage } from 'pages/MovieDetailsPage/MovieDetailsPage';
-
-import { NotFoundPage } from 'pages/NotFoundPage/NotFoundPage';
-import { Cast } from 'components/Cast/Cast';
-import { Reviews } from 'components/Reviews/Reviews';
+import NavBar from '../NavBar/NavBar';
+import UserRoutes from './UserRoutes';
 
 export const App = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/goit-react-hw-05-movies">
       <NavBar />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/movies" element={<MoviesPage />} />
-
-        <Route path="/movies/:movieId" element={<MovieDetailsPage />}>
-          <Route path="cast" element={<Cast />} />
-          <Route path="reviews" element={<Reviews />} />
-        </Route>
-
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+      <UserRoutes />
     </BrowserRouter>
   );
 };

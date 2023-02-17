@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 import css from './MovieSearchList.module.css';
 
-export const MovieSearchList = ({ movies }) => {
+const MovieSearchList = ({ movies }) => {
   const location = useLocation();
 
   const elements = movies.map(({ title, id }) => (
@@ -21,6 +21,8 @@ export const MovieSearchList = ({ movies }) => {
 
   return <ul className={css.list}>{elements}</ul>;
 };
+
+export default MovieSearchList;
 
 MovieSearchList.propTypes = {
   movies: PropTypes.arrayOf(

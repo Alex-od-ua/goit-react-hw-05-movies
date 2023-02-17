@@ -5,10 +5,10 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { getReviews } from 'components/services/api';
-import { ReviewsList } from './ReviewsList/ReviewsList';
-import { Loader } from 'components/Loader/Loader';
+import ReviewsList from './ReviewsList/ReviewsList';
+import Loader from '../Loader/Loader';
 
-export const Reviews = () => {
+const Reviews = () => {
   const [movie, setMovie] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -48,3 +48,5 @@ export const Reviews = () => {
     </>
   );
 };
+
+export default Reviews;

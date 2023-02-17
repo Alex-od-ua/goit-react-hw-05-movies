@@ -6,7 +6,7 @@ import { useCallback } from 'react';
 
 import css from './MovieDetailsList.module.css';
 
-export const MovieDetailsList = ({ details, genres }) => {
+const MovieDetailsList = ({ details, genres }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from || '/';
@@ -87,6 +87,8 @@ export const MovieDetailsList = ({ details, genres }) => {
     </>
   );
 };
+
+export default MovieDetailsList;
 
 MovieDetailsList.propTypes = {
   poster_path: PropTypes.string,

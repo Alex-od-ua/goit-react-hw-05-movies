@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import css from './CastList.module.css';
 import tempImage from '../tempImage.png';
 
-export const CastList = ({ movies }) => {
+const CastList = ({ movies }) => {
   const element = movies.map(({ original_name, profile_path, id }) => (
     <li key={id}>
       <img
@@ -28,6 +28,8 @@ export const CastList = ({ movies }) => {
     </>
   );
 };
+
+export default CastList;
 
 CastList.propTypes = {
   movies: PropTypes.arrayOf(

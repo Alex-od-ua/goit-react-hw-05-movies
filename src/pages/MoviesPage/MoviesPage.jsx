@@ -1,9 +1,11 @@
-import { MovieSearch } from 'components/MovieSearch/MovieSearch';
+import MovieSearch from '../../components/MovieSearch/MovieSearch';
 
-export const MoviesPage = () => {
+const MoviesPage = () => {
   return (
     <>
       <MovieSearch />
     </>
   );
 };
+
+export default MoviesPage;

@@ -1,9 +1,11 @@
-import { MovieDetails } from 'components/MovieDetails/MovieDetails';
+import MovieDetails from '../../components/MovieDetails/MovieDetails';
 
-export const MovieDetailsPage = () => {
+const MovieDetailsPage = () => {
   return (
     <>
       <MovieDetails />
     </>
   );
 };
+
+export default MovieDetailsPage;

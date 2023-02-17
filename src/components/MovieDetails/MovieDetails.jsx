@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { getMovieById } from 'components/services/api';
-import { MovieDetailsList } from './MovieDetailsList/MovieDetailsList';
-import { Loader } from 'components/Loader/Loader';
+import MovieDetailsList from './MovieDetailsList/MovieDetailsList';
+import Loader from '../Loader/Loader';
 
-export const MovieDetails = () => {
+const MovieDetails = () => {
   const [movie, setMovie] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -40,3 +40,5 @@ export const MovieDetails = () => {
     </>
   );
 };
+
+export default MovieDetails;

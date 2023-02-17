@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 import css from './ReviewsList.module.css';
 
-export const ReviewsList = ({ movies }) => {
+const ReviewsList = ({ movies }) => {
   const element = movies.map(({ content, id, author }) => (
     <li key={id} className={css.item}>
       <h2 className={css.title}>{author}</h2>
@@ -27,3 +27,5 @@ ReviewsList.propTypes = {
     })
   ),
 };
+
+export default ReviewsList;
